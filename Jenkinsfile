@@ -1,6 +1,5 @@
 pipeline {
 	agent any
-	def mvnHome = tool 'Maven'
 	stages {
 		stage('Repository') {
 			steps {
@@ -11,6 +10,7 @@ pipeline {
 		
 		stage('Build') {
 			steps {
+				def mvnHome = tool 'Maven'
 				withEnv(["MVN_HOME=$mvnHome"]) {
 					if (isUnix()) {
 						sh '"$MVN_HOME/bin/mvn" clean compile'
